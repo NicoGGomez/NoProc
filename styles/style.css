@@ -1,0 +1,136 @@
+/* importaciones */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Condensed+One&display=swap');
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+/* aspectos generales */
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: roboto;
+}
+
+.contenedor {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    gap: 5vh;
+}
+
+.form {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
+}
+
+/* comienzo */
+
+#cont-comienzo p::after{
+  content: "|";
+  animation: parpadeo 1s infinite;
+}
+
+#cont-comienzo .logo {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+#cont-comienzo img {
+    width: 15vh;
+}
+
+#cont-comienzo .seccion-comienzo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+    margin-bottom: 5vh;
+}
+
+/* form nombre */
+
+#form-nombre {
+    display: none;
+}
+
+.btn, .input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25vh;
+    height: 5vh;
+    font-size: 18px;
+    border: none;
+    transition: .2s;
+    background-color: rgb(235, 235, 235);
+}
+
+.input {
+    padding: 1vh;
+    border-bottom: 1px solid #000;
+}
+
+.btn:hover {
+    cursor: pointer;
+    transition: .2s;
+    background-color: rgb(204, 204, 204);
+}
+
+#cont-form-nombre {
+    display: none;
+}
+
+#cont-form-info p {
+    font-size: 36px;
+}
+
+.texto::after{
+  content: "|";
+  animation: parpadeo 1s;
+}
+
+.sin-cursor::after{
+  content: "";
+}
+
+#textoDos {
+    display: none;
+}
+
+@keyframes parpadeo{
+  50%{opacity:0;}
+}
+
+#btn-continuar {
+    display: none;
+}
+
+/* form info */
+
+#cont-form-info {
+    display: none;
+}
+
+#form-info {
+    display: none;
+}

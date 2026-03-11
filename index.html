@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - NoProc</title>
+
+    <link rel="icon" href="assets/imgs/logo.png" type="image/png">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+    <div class="contenedor" id="cont-comienzo">
+        <div class="logo">
+            <img src="assets/imgs/logo.png" alt="">
+            <img src="assets/imgs/logoNombre.png" alt="">
+        </div>
+        <div class="seccion-comienzo">
+            <p>Tu nueva vida te espera.</p>
+            <button class="btn" id="btn-comenzar">Comenzar</button>
+        </div>
+    </div>
+    
+    <div class="contenedor" id="cont-form-nombre">
+    
+        <p class="texto" id="textoUno"></p>
+        <p class="texto" id="textoDos"></p>
+
+    <form id="form-nombre" class="form" action="">
+        <input id="nombre" class="input" placeholder="¿Como te llámas?" type="text" autocomplete="off">
+        <button type="submit" class="btn" id="btn-continuar-nombre">Continuar</button>
+    </form>
+
+    </div>
+
+    <div class="contenedor" id="cont-form-info" >
+
+        <p class="texto" id="textoTres"></p>
+
+    <form id="form-info" class="form" action="">
+        <input id="info" class="input" placeholder="¿Ingresa aqui toda la informacion relevante?" type="text" autocomplete="off">
+        <button type="submit" class="btn" id="btn-continuar-info">Continuar</button>
+    </form>
+
+    </div>
+
+    <script type="module" src="scripts/main.js"></script>
+</body>
+</html>
