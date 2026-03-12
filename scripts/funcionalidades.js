@@ -35,7 +35,7 @@ export async function hablar(texto) {
 
   try {
 
-    const res = await fetch("http://localhost:3000/tts", {
+    const res = await fetch(`${API_URL}/tts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -63,7 +63,7 @@ export async function precargarAudio(texto) {
 
   try {
 
-    const res = await fetch("http://localhost:3000/tts", {
+    const res = await fetch(`${API_URL}/tts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
