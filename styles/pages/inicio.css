@@ -16,20 +16,6 @@
     margin-bottom: 5vh;
 }
 
-.cont-comienzo a {
-    color: #000;
-    font-size: 20px;
-    text-decoration: none;
-}
-
-.cont-comienzo a:active {
-    color: #000;
-}
-
-.cont-comienzo a:hover {
-    text-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-}
-
 /* form nombre */
 
 .cont-form-nombre {
@@ -75,8 +61,10 @@
 }
 
 .form-info .cont-info .btn-info {
-    background-color: rgb(247, 247, 247);
+    background-color: rgb(218, 218, 218);
     width: 22vh;
+    color: #000;
+    border-radius: 0;
 }
 
 .form-info .cont-info .btn-info:hover {

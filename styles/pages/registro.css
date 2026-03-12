@@ -1,11 +1,37 @@
+
+.cont-registro .logo img {
+    width: 10vh;
+}
+
+.cont-registro {
+    gap: 10vh;
+}
+
+.cont-registro .cont-titulo {
+    height: 2vh;
+}
+
+.cont-registro h1 {
+    font-size: 40px;
+}
+
 .form-inicio {
     width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 5vh;
 }
 
 .form-inicio label {
-    font-size: 18px;
+    display: flex;
+    justify-content: start;
+    font-size: 20px;
+}
+
+.cont-input {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
 }
