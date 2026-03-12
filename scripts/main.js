@@ -11,6 +11,7 @@ const contComienzo = document.getElementById('cont-comienzo')
 const contFormNombre = document.getElementById('cont-form-nombre')
 const contFormInfo = document.getElementById('cont-form-info')
 const contInfo = document.getElementById('cont-info')
+const contEspera = document.getElementById('cont-espera')
 
 // inputs y forms
 const inputNombre = document.getElementById("nombre")
@@ -33,7 +34,7 @@ async function cargarTextos() {
 
 btnComenzar.addEventListener("click", () => {
     contComienzo.style.display = "none"
-    
+    contEspera.style.display = "flex"
 })
 
 btnComenzar.addEventListener("click", async () => {
@@ -43,7 +44,7 @@ btnComenzar.addEventListener("click", async () => {
     await precargarAudio(textos.textoUno);
     await precargarAudio(textos.textoDos);
 
-    contComienzo.style.display = "none"
+    contEspera.style.display = "none"
     contFormNombre.style.display = "flex"
 
     siguientePaso()

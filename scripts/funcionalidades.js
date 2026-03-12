@@ -2,6 +2,7 @@ let audioActual = null;
 const audioCache = {};
 const botsHablando = document.querySelectorAll(".bot-hablando");
 const API_URL = "http://localhost:3000"
+let audioDisponible = true
 
 export async function escribir(text, elemento, i, siguientePaso) {
 
@@ -26,6 +27,8 @@ export async function escribir(text, elemento, i, siguientePaso) {
 
 export async function hablar(texto) {
 
+  if (!audioDisponible) return null;
+
   if (audioActual) audioActual.pause();
 
   if (audioCache[texto]) {
@@ -49,15 +52,20 @@ export async function hablar(texto) {
     const url = URL.createObjectURL(blob);
 
     audioActual = new Audio(url);
+    audioCache[texto] = audioActual;
+
     return audioActual;
 
   } catch (err) {
     console.log("Servidor de audio no disponible");
+    audioDisponible = false; // ← desactiva audio para siempre
     return null;
   }
 }
 
 export async function precargarAudio(texto) {
+
+  if (!audioDisponible) return;
 
   if (audioCache[texto]) return;
 
@@ -73,16 +81,17 @@ export async function precargarAudio(texto) {
 
     if (!res.ok) return null;
 
-    const audioBlob = await res.blob();
-    const audioURL = URL.createObjectURL(audioBlob);
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
 
-    const audio = new Audio(audioURL);
+    const audio = new Audio(url);
     audioCache[texto] = audio;
 
     return audio;
 
   } catch (err) {
-    console.log("Audio no disponible");
+    console.log("Audio desactivado");
+    audioDisponible = false; // ← corta futuros fetch
     return null;
   }
 }
