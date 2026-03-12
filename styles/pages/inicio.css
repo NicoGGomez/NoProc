@@ -7,18 +7,6 @@
 
 /* comienzo */
 
-.cont-comienzo .logo {
-    display: flex;
-    flex-direction: column;
-    gap: 1vh;
-}
-
-.cont-comienzo img {
-    width: 15vh;
-    user-select: none;
-    -webkit-user-drag: none;
-}
-
 .cont-comienzo .seccion-comienzo {
     display: flex;
     flex-direction: column;

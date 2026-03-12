@@ -1,0 +1,11 @@
+.form-inicio {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-inicio label {
+    font-size: 18px;
+}
