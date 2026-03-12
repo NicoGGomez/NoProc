@@ -1,16 +1,16 @@
 let audioActual = null;
 const audioCache = {};
 const botsHablando = document.querySelectorAll(".bot-hablando");
+const API_URL = "http://localhost:3000"
 
 export async function escribir(text, elemento, i, siguientePaso) {
 
     if (i === 0) {
+        elemento.textContent = "";
         botsHablando.forEach(bot => bot.classList.add("activo"));
-        const audio = await hablar(text);
 
-        if (audio) {
-            audio.play();
-        }
+        const audio = await hablar(text);
+        if (audio) audio.play();
     }
 
     if (i < text.length) {
@@ -26,53 +26,63 @@ export async function escribir(text, elemento, i, siguientePaso) {
 
 export async function hablar(texto) {
 
-  if (audioActual) {
-    audioActual.pause();
-  }
+  if (audioActual) audioActual.pause();
 
   if (audioCache[texto]) {
     audioActual = audioCache[texto];
     return audioActual;
   }
 
-  const res = await fetch("http://localhost:3000/tts", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ text: texto })
-  });
+  try {
 
-  // 🔴 si no hay créditos
-  if (!res.ok) {
-    console.warn("Sin créditos de audio");
+    const res = await fetch("http://localhost:3000/tts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ text: texto })
+    });
+
+    if (!res.ok) return null;
+
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+
+    audioActual = new Audio(url);
+    return audioActual;
+
+  } catch (err) {
+    console.log("Servidor de audio no disponible");
     return null;
   }
-
-  const audioBlob = await res.blob();
-  const audioURL = URL.createObjectURL(audioBlob);
-
-  audioActual = new Audio(audioURL);
-
-  return audioActual;
 }
 
 export async function precargarAudio(texto) {
 
   if (audioCache[texto]) return;
 
-  const res = await fetch("http://localhost:3000/tts", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ text: texto })
-  });
+  try {
 
-  const audioBlob = await res.blob();
-  const audioURL = URL.createObjectURL(audioBlob);
+    const res = await fetch("http://localhost:3000/tts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ text: texto })
+    });
 
-  audioActual = new Audio(audioURL);
-  audioCache[texto] = audioActual;
-  return audioActual;
+    if (!res.ok) return null;
+
+    const audioBlob = await res.blob();
+    const audioURL = URL.createObjectURL(audioBlob);
+
+    const audio = new Audio(audioURL);
+    audioCache[texto] = audio;
+
+    return audio;
+
+  } catch (err) {
+    console.log("Audio no disponible");
+    return null;
+  }
 }

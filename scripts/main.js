@@ -27,7 +27,7 @@ const textoTres = document.getElementById("textoTres");
 let textos;
 
 async function cargarTextos() {
-    const res = await fetch("../data/textos.json");
+    const res = await fetch("/data/textos.json");
     textos = await res.json();
 }
 
