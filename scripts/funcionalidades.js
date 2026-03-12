@@ -1,11 +1,16 @@
 let audioActual = null;
 const audioCache = {};
+const botsHablando = document.querySelectorAll(".bot-hablando");
 
 export async function escribir(text, elemento, i, siguientePaso) {
 
     if (i === 0) {
+        botsHablando.forEach(bot => bot.classList.add("activo"));
         const audio = await hablar(text);
-        audio.play();
+
+        if (audio) {
+            audio.play();
+        }
     }
 
     if (i < text.length) {
@@ -13,8 +18,9 @@ export async function escribir(text, elemento, i, siguientePaso) {
         i++;
         setTimeout(() => escribir(text, elemento, i, siguientePaso), 60);
     } else {
-        elemento.classList.add("sin-cursor")
-        siguientePaso()
+        botsHablando.forEach(bot => bot.classList.remove("activo"));
+        elemento.classList.add("sin-cursor");
+        siguientePaso();
     }
 }
 
@@ -36,6 +42,12 @@ export async function hablar(texto) {
     },
     body: JSON.stringify({ text: texto })
   });
+
+  // 🔴 si no hay créditos
+  if (!res.ok) {
+    console.warn("Sin créditos de audio");
+    return null;
+  }
 
   const audioBlob = await res.blob();
   const audioURL = URL.createObjectURL(audioBlob);

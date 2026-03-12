@@ -1,17 +1,25 @@
 import { escribir, hablar, precargarAudio } from "./funcionalidades.js"
 
+// botones
 const btnComenzar = document.getElementById('btn-comenzar')
 const btnContinuarNombre = document.getElementById('btn-continuar-nombre')
 const btnContinuarInfo = document.getElementById('btn-continuar-info')
+const btnAgregarInfo = document.getElementById('btn-agregar-info')
 
+// contenedores
 const contComienzo = document.getElementById('cont-comienzo')
 const contFormNombre = document.getElementById('cont-form-nombre')
 const contFormInfo = document.getElementById('cont-form-info')
+const contInfo = document.getElementById('cont-info')
 
+// inputs y forms
 const inputNombre = document.getElementById("nombre")
 const formNombre = document.getElementById('form-nombre')
+
+const inputInfo = document.getElementById("info")
 const formInfo = document.getElementById('form-info')
 
+// textos del bot
 const textoUno = document.getElementById("textoUno");
 const textoDos = document.getElementById("textoDos");
 const textoTres = document.getElementById("textoTres");
@@ -45,13 +53,11 @@ function siguientePaso(){
     if(paso === 1){
         escribir(textos.textoUno, textoUno, 0, siguientePaso)
         precargarAudio(textos.textoDos);
-        alert(paso)
     }
 
     if(paso === 2){
         textoDos.style.display = 'flex'
         escribir(textos.textoDos, textoDos, 0, siguientePaso)
-        alert(paso)
     }
 
     if(paso === 3){
@@ -72,12 +78,50 @@ function siguientePaso(){
 
                 let texto = `${inputNombre.value} ${textos.textoTres}`
                 escribir(texto, textoTres, 0, siguientePaso)
-                alert(paso)
             })
     }
 
     if (paso === 4) {
-        formInfo.style.display = "flex"
+        formInfo.style.display = "flex";
+
+        inputInfo.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                btnAgregarInfo.click();
+            }
+        });
+
+
+        // agregar info
+        btnAgregarInfo.addEventListener("click", () => {
+
+            if (inputInfo.value.trim() !== "") {
+
+                const info = document.createElement("button");
+                info.className = "btn btn-info";
+                info.type = "button";
+                info.textContent = inputInfo.value;
+
+                info.addEventListener("click", () => {
+                    info.remove();
+                });
+
+                contInfo.appendChild(info);
+
+                inputInfo.value = "";
+            }
+
+        });
+
+        // validar envio
+        formInfo.addEventListener("submit", (e) => {
+
+            if (contInfo.children.length === 0) {
+                e.preventDefault();
+                alert("Agregá al menos una información");
+            }
+
+        });
     }
 
 }

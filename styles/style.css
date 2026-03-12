@@ -41,38 +41,6 @@ body {
     gap: 2vh;
 }
 
-/* comienzo */
-
-#cont-comienzo p::after{
-  content: "|";
-  animation: parpadeo 1s infinite;
-}
-
-#cont-comienzo .logo {
-    display: flex;
-    flex-direction: column;
-    gap: 1vh;
-}
-
-#cont-comienzo img {
-    width: 15vh;
-}
-
-#cont-comienzo .seccion-comienzo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1vh;
-    margin-bottom: 5vh;
-}
-
-/* form nombre */
-
-#form-nombre {
-    display: none;
-}
-
 .btn, .input {
     display: flex;
     justify-content: center;
@@ -96,12 +64,10 @@ body {
     background-color: rgb(204, 204, 204);
 }
 
-#cont-form-nombre {
-    display: none;
-}
+/* cuando habla el bot */
 
-#cont-form-info p {
-    font-size: 36px;
+@keyframes parpadeo{ 
+  50%{opacity:0;}
 }
 
 .texto::after{
@@ -113,12 +79,90 @@ body {
   content: "";
 }
 
-#textoDos {
+.bot-hablando {
+    display: none;
+    width: 20px;
+    height: 20px;
+    justify-content: center;
+    transform: rotate(180deg);
+}
+
+.bot-hablando.activo {
+    display: flex;
+    width: 200px;
+    height: 20px;
+    justify-content: center;
+}
+
+.bot-hablando span {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin: 1px;
+    background: rgb(0, 0, 0);
+    animation: hablar 0.6s infinite ease-in-out;
+}
+
+.bot-hablando span:nth-child(2) { animation-delay: 0.1s; }
+.bot-hablando span:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes hablar {
+    0%,100% { height: 6px; }
+    50% { height: 16px; }
+}
+
+.hablando {
+    animation: respirar 1s infinite;
+}
+
+@keyframes respirar {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* comienzo */
+
+#cont-comienzo .logo {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+#cont-comienzo img {
+    width: 15vh;
+}
+
+#cont-comienzo .seccion-comienzo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+    margin-bottom: 5vh;
+}
+
+#cont-comienzo p::after{
+  content: "|";
+  animation: parpadeo 1s infinite;
+}
+
+/* form nombre */
+
+#form-nombre {
     display: none;
 }
 
-@keyframes parpadeo{
-  50%{opacity:0;}
+#cont-form-nombre {
+    display: none;
+}
+
+#cont-form-nombre p {
+    font-size: 36px;
+}
+
+#textoDos {
+    display: none;
 }
 
 #btn-continuar {
@@ -133,4 +177,36 @@ body {
 
 #form-info {
     display: none;
+}
+
+.cont-btns {
+    display: flex;
+    gap: 2vh;
+}
+
+#form-info .cont-info {
+    display: flex;
+    justify-content: center;
+    gap: 2vh;
+    flex-wrap: wrap;
+}
+
+#form-info .cont-info .btn-info {
+    background-color: rgb(247, 247, 247);
+    width: 22vh;
+}
+
+#form-info .cont-info .btn-info:hover {
+    background-color: rgb(255, 92, 92);
+}
+
+.btn-info::after {
+    content: "✖";
+    margin-left: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.btn-info:hover::after {
+    opacity: 1;
 }
