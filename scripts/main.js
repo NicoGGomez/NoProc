@@ -31,6 +31,11 @@ async function cargarTextos() {
     textos = await res.json();
 }
 
+btnComenzar.addEventListener("click", () => {
+    contComienzo.style.display = "none"
+    
+})
+
 btnComenzar.addEventListener("click", async () => {
 
     await cargarTextos();

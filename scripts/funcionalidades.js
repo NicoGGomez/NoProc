@@ -7,13 +7,13 @@ export async function escribir(text, elemento, i, siguientePaso) {
 
     if (i === 0) {
         elemento.textContent = "";
-        botsHablando.forEach(bot => bot.classList.add("activo"));
 
         const audio = await hablar(text);
         if (audio) audio.play();
     }
 
     if (i < text.length) {
+        botsHablando.forEach(bot => bot.classList.add("activo"));
         elemento.textContent += text.charAt(i);
         i++;
         setTimeout(() => escribir(text, elemento, i, siguientePaso), 60);
