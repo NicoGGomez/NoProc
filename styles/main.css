@@ -1,0 +1,24 @@
+/* importaciones */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Condensed+One&display=swap');
+
+@import url('componentes.css');
+@import url('animaciones.css');
+@import url('bot.css');
+@import url('pages/inicio.css');
+@import url('pages/registro.css');
+
+/* aspectos generales */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+}

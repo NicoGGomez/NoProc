@@ -1,0 +1,30 @@
+@keyframes parpadeo{ 
+  50%{opacity:0;}
+}
+
+.texto::after{
+  content: "|";
+  animation: parpadeo 1s;
+}
+
+.cont-comienzo p::after{
+  content: "|";
+  animation: parpadeo 1s infinite;
+}
+
+@keyframes hablar {
+    0%,100% { height: 6px; }
+    50% { height: 50px; }
+}
+
+@keyframes respirar {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.hablando {
+    animation: respirar 1s infinite;
+}
+
+
