@@ -6,8 +6,12 @@
         padding: 1vh;
     }
 
-    /*  */
+    .seccion-comienzo p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-    
+
 
 }
