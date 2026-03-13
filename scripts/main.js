@@ -1,4 +1,4 @@
-import { escribir, hablar, precargarAudio } from "./funcionalidades.js"
+import { escribir, precargarAudio } from "./funcionalidades.js"
 
 // botones
 const btnComenzar = document.getElementById('btn-comenzar')
@@ -12,6 +12,7 @@ const contFormNombre = document.getElementById('cont-form-nombre')
 const contFormInfo = document.getElementById('cont-form-info')
 const contInfo = document.getElementById('cont-info')
 const contEspera = document.getElementById('cont-espera')
+const contPersonalizar = document.getElementById('cont-personalizar')
 
 // inputs y forms
 const inputNombre = document.getElementById("nombre")
@@ -24,6 +25,17 @@ const formInfo = document.getElementById('form-info')
 const textoUno = document.getElementById("textoUno");
 const textoDos = document.getElementById("textoDos");
 const textoTres = document.getElementById("textoTres");
+
+const data = {
+    nombre: "",
+    info: []
+}
+
+const datosGuardados = localStorage.getItem("datosUsuario")
+
+if (datosGuardados) {
+    Object.assign(data, JSON.parse(datosGuardados))
+}
 
 let textos;
 
@@ -79,6 +91,9 @@ function siguientePaso(){
             formNombre.addEventListener("submit", async (e) => {
                 e.preventDefault()
 
+                data.nombre = inputNombre.value
+                localStorage.setItem("datosUsuario", JSON.stringify(data))
+
                 contFormNombre.style.display = "none"
                 contFormInfo.style.display = "flex"
 
@@ -103,13 +118,27 @@ function siguientePaso(){
 
             if (inputInfo.value.trim() !== "") {
 
+                const valor = inputInfo.value
+
+                data.info.push(valor)
+                localStorage.setItem("datosUsuario", JSON.stringify(data))
+
                 const info = document.createElement("button");
                 info.className = "btn btn-info";
                 info.type = "button";
                 info.textContent = inputInfo.value;
 
                 info.addEventListener("click", () => {
-                    info.remove();
+                    const index = data.info.indexOf(valor)
+
+                    if (index !== -1) {
+                        data.info.splice(index, 1)
+                        localStorage.setItem("datosUsuario", JSON.stringify(data))
+                    }
+
+                    
+
+                    info.remove()
                 });
 
                 contInfo.appendChild(info);
@@ -121,13 +150,20 @@ function siguientePaso(){
 
         // validar envio
         formInfo.addEventListener("submit", (e) => {
+            e.preventDefault()
 
             if (contInfo.children.length === 0) {
                 e.preventDefault();
                 alert("Agregá al menos una información");
             }
 
+            contFormInfo.style.display = 'none'
+            contPersonalizar.style.display = 'flex'
+
+            console.log(data)
+
         });
     }
+    
 
 }

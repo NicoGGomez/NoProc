@@ -81,3 +81,9 @@
 .btn-info:hover::after {
     opacity: 1;
 }
+
+/* personalizar */
+
+.cont-personalizar {
+    display: none;
+}
