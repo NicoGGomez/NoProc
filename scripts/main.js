@@ -25,17 +25,18 @@ const formInfo = document.getElementById('form-info')
 const textoUno = document.getElementById("textoUno");
 const textoDos = document.getElementById("textoDos");
 const textoTres = document.getElementById("textoTres");
+const textoCuatro = document.getElementById("textoCuatro");
 
 const data = {
     nombre: "",
     info: []
 }
 
-const datosGuardados = localStorage.getItem("datosUsuario")
+// const datosGuardados = localStorage.getItem("datosUsuario")
 
-if (datosGuardados) {
-    Object.assign(data, JSON.parse(datosGuardados))
-}
+// if (datosGuardados) {
+//     Object.assign(data, JSON.parse(datosGuardados))
+// }
 
 let textos;
 
@@ -44,12 +45,10 @@ async function cargarTextos() {
     textos = await res.json();
 }
 
-btnComenzar.addEventListener("click", () => {
+btnComenzar.addEventListener("click", async () => {
+
     contComienzo.style.display = "none"
     contEspera.style.display = "flex"
-})
-
-btnComenzar.addEventListener("click", async () => {
 
     await cargarTextos();
 
@@ -92,7 +91,7 @@ function siguientePaso(){
                 e.preventDefault()
 
                 data.nombre = inputNombre.value
-                localStorage.setItem("datosUsuario", JSON.stringify(data))
+                // localStorage.setItem("datosUsuario", JSON.stringify(data))
 
                 contFormNombre.style.display = "none"
                 contFormInfo.style.display = "flex"
@@ -121,7 +120,7 @@ function siguientePaso(){
                 const valor = inputInfo.value
 
                 data.info.push(valor)
-                localStorage.setItem("datosUsuario", JSON.stringify(data))
+                // localStorage.setItem("datosUsuario", JSON.stringify(data))
 
                 const info = document.createElement("button");
                 info.className = "btn btn-info";
@@ -133,7 +132,7 @@ function siguientePaso(){
 
                     if (index !== -1) {
                         data.info.splice(index, 1)
-                        localStorage.setItem("datosUsuario", JSON.stringify(data))
+                        // localStorage.setItem("datosUsuario", JSON.stringify(data))
                     }
 
                     
@@ -160,6 +159,11 @@ function siguientePaso(){
             contFormInfo.style.display = 'none'
             contPersonalizar.style.display = 'flex'
 
+            function mostrarData(array){
+                return array.join(" ")
+            }
+
+            textoCuatro.textContent = `${data.nombre} ${mostrarData(data.info)}`
             console.log(data)
 
         });
